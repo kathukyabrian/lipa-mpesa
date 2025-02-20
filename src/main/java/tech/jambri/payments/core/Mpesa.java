@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import tech.jambri.payments.config.ApplicationProperties;
 import tech.jambri.payments.core.factory.ServiceRepositoryFactory;
+import tech.jambri.payments.dto.MpesaSTKResponse;
 import tech.jambri.payments.dto.STKErrorResponse;
 import tech.jambri.payments.dto.STKRequest;
 import tech.jambri.payments.dto.STKSuccessResponse;
@@ -21,7 +22,7 @@ import java.util.Map;
 public class Mpesa {
     private static final Logger logger = LogManager.getLogger(Mpesa.class);
 
-    public static void requestPayment(Integer amount, String phoneNumber, String accountRef, String transactionDesc) {
+    public static MpesaSTKResponse requestPayment(Integer amount, String phoneNumber, String accountRef, String transactionDesc) {
         ObjectMapper objectMapper = new ObjectMapper();
 
         String accessToken = Auth.getAccessToken(logger);
@@ -78,12 +79,13 @@ public class Mpesa {
 
 
         if (successResponse != null) {
-            logger.info("success:::::::{}", successResponse);
+            return new MpesaSTKResponse(successResponse.getMerchantRequestId(), successResponse.getResponseCode(), successResponse.getResponseDescription(), successResponse.getResponseCode().equals("0"));
         }
 
         if (errorResponse != null) {
-            logger.info("error:::::::::::{}", errorResponse);
+            return new MpesaSTKResponse(errorResponse.getMerchantRequestId(), errorResponse.getResponseCode(), errorResponse.getResponseDescription(), false);
         }
 
+        return null;
     }
 }
