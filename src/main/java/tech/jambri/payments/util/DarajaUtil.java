@@ -17,4 +17,10 @@ public class DarajaUtil {
         return encodedPassword;
     }
 
+    public static String generateAccessToken(String consumerKey,String consumerSecret){
+        String rawAccessToken =consumerKey + ":" + consumerSecret;
+        String encodedAccessToken = Base64.getEncoder().encodeToString(rawAccessToken.getBytes(StandardCharsets.UTF_8));
+        return encodedAccessToken;
+    }
+
 }
