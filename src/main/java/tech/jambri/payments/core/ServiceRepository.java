@@ -3,6 +3,9 @@ package tech.jambri.payments.core;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import tech.jambri.payments.config.ApplicationProperties;
+import tech.jambri.payments.config.ConfigUtil;
+
+import java.util.Properties;
 
 public class ServiceRepository implements Runnable {
 
@@ -13,6 +16,18 @@ public class ServiceRepository implements Runnable {
     public void init(ApplicationProperties applicationProperties) {
         this.applicationProperties = applicationProperties;
         this.thread = new Thread(this, "mpesa");
+    }
+
+    public void init() {
+        try {
+            Properties properties = ConfigUtil.readConfig();
+            ApplicationProperties applicationProperties = ConfigUtil.getProperties(properties);
+            ConfigUtil.validateProperties(applicationProperties);
+            this.applicationProperties = applicationProperties;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public void start() {
