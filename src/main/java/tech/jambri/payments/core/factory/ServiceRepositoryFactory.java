@@ -1,6 +1,7 @@
 package tech.jambri.payments.core.factory;
 
 
+import tech.jambri.payments.config.ApplicationProperties;
 import tech.jambri.payments.core.ServiceRepository;
 
 /**
@@ -14,5 +15,10 @@ public class ServiceRepositoryFactory {
             serviceRepository = new ServiceRepository();
         }
         return serviceRepository;
+    }
+
+    public static ApplicationProperties getApplicationProperties() {
+        ServiceRepository serviceRepository = getServiceRepository();
+        return serviceRepository.getApplicationProperties();
     }
 }
