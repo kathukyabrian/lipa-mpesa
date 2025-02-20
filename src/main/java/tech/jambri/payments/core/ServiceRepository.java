@@ -24,6 +24,7 @@ public class ServiceRepository implements Runnable {
             ApplicationProperties applicationProperties = ConfigUtil.getProperties(properties);
             ConfigUtil.validateProperties(applicationProperties);
             this.applicationProperties = applicationProperties;
+            this.thread = new Thread(this, "mpesa");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
