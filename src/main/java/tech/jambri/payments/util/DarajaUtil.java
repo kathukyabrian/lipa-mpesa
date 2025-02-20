@@ -6,8 +6,6 @@ import java.util.Base64;
 import java.util.Date;
 
 public class DarajaUtil {
-
-
     public static String generateTimestamp(){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
         return simpleDateFormat.format(new Date());
