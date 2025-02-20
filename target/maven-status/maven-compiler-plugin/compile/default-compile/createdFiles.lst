@@ -1,6 +1,7 @@
 tech/jambri/payments/core/ServiceRepository.class
-tech/jambri/payments/exceptions/ConfigurationException.class
 tech/jambri/payments/App.class
+tech/jambri/payments/exceptions/ConfigurationException.class
+tech/jambri/payments/util/DarajaUtil.class
 tech/jambri/payments/config/ConfigUtil.class
 tech/jambri/payments/core/factory/ServiceRepositoryFactory.class
 tech/jambri/payments/constants/ServiceConstants.class
