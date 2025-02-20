@@ -6,13 +6,9 @@ import tech.jambri.payments.config.ApplicationProperties;
 import tech.jambri.payments.config.ConfigUtil;
 import tech.jambri.payments.core.ServiceRepository;
 import tech.jambri.payments.core.factory.ServiceRepositoryFactory;
-import tech.jambri.payments.util.DarajaUtil;
 
 import java.util.Properties;
 
-/**
- * Hello world!
- */
 public class App {
     private static final Logger logger = LogManager.getLogger(App.class);
 
@@ -31,7 +27,6 @@ public class App {
             serviceRepository.init(applicationProperties);
             logger.debug("system|initialized service repository|about to start service repository");
             serviceRepository.start();
-
         } catch (Exception e) {
             logger.error("system|encountered exception", e);
         }

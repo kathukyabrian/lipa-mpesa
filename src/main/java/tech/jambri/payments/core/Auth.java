@@ -2,11 +2,11 @@ package tech.jambri.payments.core;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.MediaType;
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import tech.jambri.payments.config.ApplicationProperties;
 import tech.jambri.payments.core.factory.ServiceRepositoryFactory;
 import tech.jambri.payments.dto.DarajaAuthResponse;
+import tech.jambri.payments.util.DarajaUtil;
 import tech.jambri.payments.util.HttpUtil;
 
 import java.io.IOException;
@@ -34,7 +34,7 @@ public class Auth {
     private static String getAuth(Logger logger) {
         ApplicationProperties applicationProperties = ServiceRepositoryFactory.getApplicationProperties();
         String url = applicationProperties.getAuthUrl();
-        String password = "";
+        String password = DarajaUtil.generateAccessToken(applicationProperties.getConsumerKey(), applicationProperties.getConsumerSecret());
 
         Map<String, String> headers = new HashMap<>();
         headers.put("Authorization", "Basic " + password);
