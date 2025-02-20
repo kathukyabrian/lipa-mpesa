@@ -1,6 +1,6 @@
 package tech.jambri.payments.exceptions;
 
-public class ConfigurationException extends Exception{
+public class ConfigurationException extends Exception {
     public ConfigurationException() {
     }
 

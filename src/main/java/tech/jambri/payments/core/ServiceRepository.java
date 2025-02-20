@@ -19,7 +19,7 @@ public class ServiceRepository implements Runnable {
         this.thread.start();
     }
 
-    public void stop(){
+    public void stop() {
         this.thread.interrupt();
     }
 

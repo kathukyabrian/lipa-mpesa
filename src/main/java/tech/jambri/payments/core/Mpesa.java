@@ -1,7 +1,6 @@
 package tech.jambri.payments.core;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.MediaType;
 import org.apache.logging.log4j.LogManager;

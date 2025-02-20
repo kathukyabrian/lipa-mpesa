@@ -6,19 +6,19 @@ import java.util.Base64;
 import java.util.Date;
 
 public class DarajaUtil {
-    public static String generateTimestamp(){
+    public static String generateTimestamp() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
         return simpleDateFormat.format(new Date());
     }
 
-    public static String generatePassword(String shortCode, String passKey, String timestamp){
+    public static String generatePassword(String shortCode, String passKey, String timestamp) {
         String rawPassword = shortCode + passKey + timestamp;
         String encodedPassword = Base64.getEncoder().encodeToString(rawPassword.getBytes(StandardCharsets.UTF_8));
         return encodedPassword;
     }
 
-    public static String generateAccessToken(String consumerKey,String consumerSecret){
-        String rawAccessToken =consumerKey + ":" + consumerSecret;
+    public static String generateAccessToken(String consumerKey, String consumerSecret) {
+        String rawAccessToken = consumerKey + ":" + consumerSecret;
         String encodedAccessToken = Base64.getEncoder().encodeToString(rawAccessToken.getBytes(StandardCharsets.UTF_8));
         return encodedAccessToken;
     }

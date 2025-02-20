@@ -4,10 +4,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import tech.jambri.payments.config.ApplicationProperties;
 import tech.jambri.payments.config.ConfigUtil;
-import tech.jambri.payments.core.Mpesa;
 import tech.jambri.payments.core.ServiceRepository;
 import tech.jambri.payments.core.factory.ServiceRepositoryFactory;
-import tech.jambri.payments.dto.MpesaSTKResponse;
 
 import java.util.Properties;
 
