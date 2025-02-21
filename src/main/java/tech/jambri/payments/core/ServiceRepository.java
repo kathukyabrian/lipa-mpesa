@@ -20,6 +20,7 @@ public class ServiceRepository implements Runnable {
 
     public void init() {
         try {
+            log.info("system|first time request|initializing");
             Properties properties = ConfigUtil.readConfig();
             ApplicationProperties applicationProperties = ConfigUtil.getProperties(properties);
             ConfigUtil.validateProperties(applicationProperties);
@@ -33,6 +34,7 @@ public class ServiceRepository implements Runnable {
 
     public void start() {
         this.thread.start();
+        log.info("system|started payment thread|ready for requests");
     }
 
     public void stop() {

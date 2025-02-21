@@ -13,6 +13,12 @@ public class ServiceRepositoryFactory {
     public static ServiceRepository getServiceRepository() {
         if (serviceRepository == null) {
             serviceRepository = new ServiceRepository();
+            try {
+                serviceRepository.init();
+                serviceRepository.start();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
         return serviceRepository;
     }
