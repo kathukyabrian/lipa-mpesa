@@ -21,12 +21,8 @@ public class HttpUtil {
         }
 
         Request request = requestBuilder.build();
-        try (
-                Response response = client.newCall(request).execute();
-        ) {
-            return response.body().string();
-        }
 
+        return getResponse(client, request);
     }
 
     public static String get(String url, Map<String, String> headerMap, MediaType mediaType) throws IOException {
@@ -42,12 +38,14 @@ public class HttpUtil {
                 .get()
                 .build();
 
+        return getResponse(client, request);
+    }
+
+    private static String getResponse(OkHttpClient client, Request request) throws IOException {
         try (
                 Response response = client.newCall(request).execute();
         ) {
             return response.body().string();
-
         }
-
     }
 }

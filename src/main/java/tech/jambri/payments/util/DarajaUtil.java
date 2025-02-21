@@ -13,14 +13,12 @@ public class DarajaUtil {
 
     public static String generatePassword(String shortCode, String passKey, String timestamp) {
         String rawPassword = shortCode + passKey + timestamp;
-        String encodedPassword = Base64.getEncoder().encodeToString(rawPassword.getBytes(StandardCharsets.UTF_8));
-        return encodedPassword;
+        return Base64.getEncoder().encodeToString(rawPassword.getBytes(StandardCharsets.UTF_8));
     }
 
     public static String generateAccessToken(String consumerKey, String consumerSecret) {
         String rawAccessToken = consumerKey + ":" + consumerSecret;
-        String encodedAccessToken = Base64.getEncoder().encodeToString(rawAccessToken.getBytes(StandardCharsets.UTF_8));
-        return encodedAccessToken;
+        return Base64.getEncoder().encodeToString(rawAccessToken.getBytes(StandardCharsets.UTF_8));
     }
 
 }
