@@ -1,7 +1,9 @@
 package tech.jambri.payments.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
+@Data
 public class DarajaAuthResponse {
 
     @JsonProperty("access_token")
@@ -9,22 +11,6 @@ public class DarajaAuthResponse {
 
     @JsonProperty("expires_in")
     private String expiresIn;
-
-    public String getAccessToken() {
-        return accessToken;
-    }
-
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
-    }
-
-    public String getExpiresIn() {
-        return expiresIn;
-    }
-
-    public void setExpiresIn(String expiresIn) {
-        this.expiresIn = expiresIn;
-    }
 
     @Override
     public String toString() {
