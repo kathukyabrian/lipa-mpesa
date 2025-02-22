@@ -6,11 +6,12 @@ import okhttp3.MediaType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import tech.jambri.payments.config.ApplicationProperties;
+import tech.jambri.payments.constants.ServiceConstants;
 import tech.jambri.payments.core.factory.ServiceRepositoryFactory;
-import tech.jambri.payments.dto.MpesaSTKResponse;
-import tech.jambri.payments.dto.STKErrorResponse;
-import tech.jambri.payments.dto.STKRequest;
-import tech.jambri.payments.dto.STKSuccessResponse;
+import tech.jambri.payments.dto.*;
+import tech.jambri.payments.dto.result.CallBackItem;
+import tech.jambri.payments.dto.result.DarajaSTKCallBack;
+import tech.jambri.payments.dto.result.MpesaResult;
 import tech.jambri.payments.util.DarajaUtil;
 import tech.jambri.payments.util.HttpUtil;
 
@@ -86,5 +87,33 @@ public class Mpesa {
         }
 
         return null;
+    }
+
+    public static MpesaPaymentResult handleResult(MpesaResult mpesaResult) {
+        MpesaPaymentResult result = new MpesaPaymentResult();
+
+        DarajaSTKCallBack callBack = mpesaResult.getBody().getStkCallBack();
+        result.setMerchantRequestId(callBack.getMerchantRequestId());
+        result.setCode(callBack.getResultCode());
+        result.setDescription(callBack.getResultDescription());
+
+        if (mpesaResult.getBody().getStkCallBack().getCallBackMetaData() != null) {
+            for (CallBackItem callBackItem : mpesaResult.getBody().getStkCallBack().getCallBackMetaData().getItem()) {
+                if (callBackItem.getName().equals(ServiceConstants.MPESA_CALLBACK_REF_NO_KEY)) {
+                    result.setTransactionRef((String) callBackItem.getValue());
+                }
+
+                if (callBackItem.getName().equals(ServiceConstants.MPESA_CALLBACK_AMOUNT_KEY)) {
+                    result.setAmount((Double) callBackItem.getValue());
+                }
+
+                if (callBackItem.getName().equals(ServiceConstants.MPESA_CALLBACK_PHONE_NUMBER_KEY)) {
+                    result.setPhoneNumber(callBackItem.getValue() + "");
+                }
+            }
+        }
+        result.setSuccess(result.getCode().equals(0));
+
+        return result;
     }
 }
